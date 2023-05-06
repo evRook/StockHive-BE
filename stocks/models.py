@@ -2,10 +2,11 @@ from django.db import models
 
 # Create your models here.
 class Company(models.Model):
-    Name = models.CharField(max_length=10)
+    Symbol = models.CharField(null=True, max_length=10)
+    Name = models.CharField()
 
     def __str__(self):
-        return self.Name
+        return self.Symbol
 
 class History(models.Model):
     ticker = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='history')

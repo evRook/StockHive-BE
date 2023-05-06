@@ -12,6 +12,7 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
         model = Company
         fields = (
             'id',
+            'Symbol',
             'Name',
             'history',
         )

@@ -8,6 +8,8 @@ django = "*"
 psycopg2-binary = "*"
 djangorestframework = "*"
 yfinance = "*"
+django-import-export = "*"
+pandas = "*"
 
 [dev-packages]
 

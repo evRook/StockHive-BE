@@ -9,7 +9,7 @@ class Company(models.Model):
         return self.Symbol
 
 class History(models.Model):
-    ticker = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='history')
+    ticker = models.ForeignKey(Company, null=True, on_delete=models.CASCADE, related_name='history')
     date = models.DateField()
     open = models.IntegerField()
     close = models.IntegerField()

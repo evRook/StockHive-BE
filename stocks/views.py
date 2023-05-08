@@ -16,7 +16,11 @@ class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
-class HistoryList(generics.ListAPIView):
+class HistoryList(generics.ListCreateAPIView):
+    queryset = History.objects.all()
+    serializer_class = HistorySerializer
+
+class HistoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = History.objects.all()
     serializer_class = HistorySerializer
 

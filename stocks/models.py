@@ -10,11 +10,10 @@ class Company(models.Model):
 
 class History(models.Model):
     ticker = models.ForeignKey(Company, null=True, on_delete=models.CASCADE, related_name='history')
-    date = models.DateField()
-    open = models.IntegerField()
-    close = models.IntegerField()
-    dividends = models.IntegerField()
-    splits = models.IntegerField()
+    Open = models.IntegerField()
+    Close = models.IntegerField()
+    High = models.IntegerField()
+    Low = models.IntegerField()
 
     def __str__(self):
         return self.ticker

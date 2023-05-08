@@ -26,9 +26,8 @@ class HistorySerializer(serializers.HyperlinkedModelSerializer):
         model = History
         fields = (
             'ticker',
-            'date',
-            'open', 
-            'close', 
-            'dividends', 
-            'splits', 
+            'Open', 
+            'Close', 
+            'High', 
+            'Low', 
         )

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Company, History
+from .models import Company, History, CompanyInfo
 
 class CompanySerializer(serializers.HyperlinkedModelSerializer):
     history = serializers.HyperlinkedRelatedField(
@@ -31,4 +31,39 @@ class HistorySerializer(serializers.HyperlinkedModelSerializer):
             'Close', 
             'High', 
             'Low', 
+        )
+
+class CompanyInfoSerializer(serializers.HyperlinkedModelSerializer):
+    Company_id = serializers.PrimaryKeyRelatedField(
+        queryset = Company.objects.all()
+    )
+
+    class Meta:
+        model = CompanyInfo
+        fields = (
+            'id',
+            'Company_id',
+            'symbol', 
+            'shortName',
+            'longName',
+            'address1',
+            'city', 
+            'state', 
+            'country',
+            'phone',
+            'website',
+            'sector',
+            'logBuisnessSummary', 
+            'overallRisk',
+            'open',
+            'dayLow',
+            'dayHigh',
+            'regularMarketPreviousClose',
+            'regularMarketOpen',
+            'regularMarketDayLow',
+            'regularMarketDayHigh',
+            'marketCap',
+            'fiftyTwoWeekHigh',
+            'fiftyTwoWeekLow',
+            'currency',
         )

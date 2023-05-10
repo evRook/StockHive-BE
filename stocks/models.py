@@ -9,11 +9,11 @@ class Company(models.Model):
         return self.Symbol
 
 class History(models.Model):
-    ticker = models.ForeignKey(Company, null=True, on_delete=models.CASCADE, related_name='history')
+    Company_id = models.ForeignKey(Company, null=True, on_delete=models.CASCADE, related_name='history')
     Open = models.IntegerField()
     Close = models.IntegerField()
     High = models.IntegerField()
     Low = models.IntegerField()
 
     def __str__(self):
-        return self.ticker
+        return self.Company_id

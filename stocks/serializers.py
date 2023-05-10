@@ -18,14 +18,15 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
         )
 
 class HistorySerializer(serializers.HyperlinkedModelSerializer):
-    ticker = serializers.PrimaryKeyRelatedField(
+    Company_id = serializers.PrimaryKeyRelatedField(
         queryset = Company.objects.all()
     )
 
     class Meta:
         model = History
         fields = (
-            'ticker',
+            'id',
+            'Company_id',
             'Open', 
             'Close', 
             'High', 

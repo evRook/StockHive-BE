@@ -9,5 +9,6 @@ urlpatterns = [
     path('docs/history/<int:pk>', views.HistoryDetail.as_view(), name='history_detail'),
 
     path('company/', views.GetCompany.as_view(), name='companys_list'),
-    path('companyinfo/', views.GetCompanyInfo.as_view(), name='companys_list')
+    path('companyinfo/', views.GetCompanyInfo.as_view(), name='companyinfo_list'),
+    path('companyinfo/<str:pk>', views.TestInfo.as_view(), name='testinfo_list')
 ]

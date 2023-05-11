@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 from django.http import JsonResponse
 import yfinance as yf
 import datetime
+import requests
 
 # Create your views here.
 
@@ -38,7 +39,7 @@ class GetCompanyInfo(APIView):
     serializer_class = CompanyInfoSerializer
 
     def get(self, request):
-
+        
         context = [ {
             'symbol': data.symbol, 
             'shortName': data.shortName,
@@ -50,7 +51,7 @@ class GetCompanyInfo(APIView):
             'phone': data.phone,
             'website': data.website,
             'sector': data.sector,
-            'logBuisnessSummary': data.longBuisnessSummary, 
+            'longBuisnessSummary': data.longBuisnessSummary, 
             'overallRisk': data.overallRisk,
             'open': data.open,
             'dayLow': data.dayLow,
@@ -76,4 +77,37 @@ class GetCompany(APIView):
         for data in Company.objects.all()]
         return Response(context)
 
-    
+class TestInfo(APIView):
+    serializer_class = CompanyInfoSerializer
+
+    def get(self, request, pk):
+        ticker = yf.Ticker(pk)
+        info = ticker.info
+        context = [{
+            'symbol': info['symbol'],
+            'shortName': info['shortName'],
+            'longName': info['longName'],
+            'address1': info['address1'],
+            'city': info['city'], 
+            'state': info['state'], 
+            'country': info['country'],
+            'phone': info['phone'],
+            'website': info['website'],
+            'sector': info['sector'],
+            'longBusinessSummary': info['longBusinessSummary'], 
+            'overallRisk': info['overallRisk'],
+            'open': info['open'],
+            'dayLow': info['dayLow'],
+            'dayHigh': info['dayHigh'],
+            'regularMarketPreviousClose': info['regularMarketPreviousClose'],
+            'regularMarketOpen': info['regularMarketOpen'],
+            'regularMarketDayLow': info['regularMarketDayLow'],
+            'regularMarketDayHigh': info['regularMarketDayHigh'],
+            'marketCap': info['marketCap'],
+            'fiftyTwoWeekHigh': info['fiftyTwoWeekHigh'],
+            'fiftyTwoWeekLow': info['fiftyTwoWeekLow'],
+            'currency': info['currency'],
+        }]
+
+        return Response(context)
+

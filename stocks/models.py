@@ -19,7 +19,6 @@ class History(models.Model):
         return self.Company_id
     
 class CompanyInfo(models.Model):
-    Company_id = models.ForeignKey(Company, null=True, on_delete=models.CASCADE, related_name='company_info')
     symbol = models.CharField()
     shortName = models.CharField()
     longName = models.CharField()
@@ -30,7 +29,7 @@ class CompanyInfo(models.Model):
     phone = models.CharField()
     website = models.CharField()
     sector = models.CharField()
-    logBuisnessSummary = models.CharField()
+    longBuisnessSummary = models.CharField()
     overallRisk = models.IntegerField()
     open = models.IntegerField()
     dayLow = models.IntegerField()

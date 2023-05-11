@@ -42,7 +42,6 @@ class CompanyInfoSerializer(serializers.HyperlinkedModelSerializer):
         model = CompanyInfo
         fields = (
             'id',
-            'Company_id',
             'symbol', 
             'shortName',
             'longName',
@@ -53,7 +52,7 @@ class CompanyInfoSerializer(serializers.HyperlinkedModelSerializer):
             'phone',
             'website',
             'sector',
-            'logBuisnessSummary', 
+            'longBuisnessSummary', 
             'overallRisk',
             'open',
             'dayLow',

@@ -38,48 +38,6 @@ class CompanyInfoList(generics.ListCreateAPIView):
 class GetCompanyInfo(APIView):
     serializer_class = CompanyInfoSerializer
 
-    def get(self, request):
-        
-        context = [ {
-            'symbol': data.symbol, 
-            'shortName': data.shortName,
-            'longName': data.longName,
-            'address1': data.address1,
-            'city': data.city, 
-            'state': data.state, 
-            'country': data.country,
-            'phone': data.phone,
-            'website': data.website,
-            'sector': data.sector,
-            'longBuisnessSummary': data.longBuisnessSummary, 
-            'overallRisk': data.overallRisk,
-            'open': data.open,
-            'dayLow': data.dayLow,
-            'dayHigh': data.dayHigh,
-            'regularMarketPreviousClose': data.regularMarketPreviousClose,
-            'regularMarketOpen': data.regularMarketOpen,
-            'regularMarketDayLow': data.regularMarketDayLow,
-            'regularMarketDayHigh': data.regularMarketDayHigh,
-            'marketCap': data.marketCap,
-            'fiftyTwoWeekHigh': data.fiftyTwoWeekHigh,
-            'fiftyTwoWeekLow': data.fiftyTwoWeekLow,
-            'currency': data.currency,
-        }
-        for data in CompanyInfo.objects.all()]
-        return Response(context)
-
-
-class GetCompany(APIView):
-    serializer_class = CompanySerializer
-
-    def get(self, request):
-        context = [ {"Symbol": data.Symbol, "Name": data.Name} 
-        for data in Company.objects.all()]
-        return Response(context)
-
-class TestInfo(APIView):
-    serializer_class = CompanyInfoSerializer
-
     def get(self, request, pk):
         ticker = yf.Ticker(pk)
         info = ticker.info
@@ -110,4 +68,14 @@ class TestInfo(APIView):
         }]
 
         return Response(context)
+
+
+class GetCompany(APIView):
+    serializer_class = CompanySerializer
+
+    def get(self, request):
+        context = [ {"Symbol": data.Symbol, "Name": data.Name} 
+        for data in Company.objects.all()]
+        return Response(context)
+
 

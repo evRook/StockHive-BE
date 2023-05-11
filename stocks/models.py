@@ -29,7 +29,7 @@ class CompanyInfo(models.Model):
     phone = models.CharField()
     website = models.CharField()
     sector = models.CharField()
-    longBuisnessSummary = models.CharField()
+    longBuisnessSummary = models.TextField()
     overallRisk = models.IntegerField()
     open = models.IntegerField()
     dayLow = models.IntegerField()

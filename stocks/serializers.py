@@ -1,5 +1,9 @@
 from rest_framework import serializers
+from django.contrib.auth import get_user_model
+from djoser.serializers import UserCreateSerializer
 from .models import Company, History, CompanyInfo
+
+User = get_user_model()
 
 class CompanySerializer(serializers.HyperlinkedModelSerializer):
     history = serializers.HyperlinkedRelatedField(
@@ -65,4 +69,15 @@ class CompanyInfoSerializer(serializers.HyperlinkedModelSerializer):
             'fiftyTwoWeekHigh',
             'fiftyTwoWeekLow',
             'currency',
+        )
+
+class UserCreateSerializer(UserCreateSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'first',
+            'last',
+            'email',
+            'password',
         )

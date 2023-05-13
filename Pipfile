@@ -12,6 +12,9 @@ django-import-export = "*"
 pandas = "*"
 requests = "*"
 django-cors-headers = "*"
+djangorestframework-simplejwt = "*"
+djoser = "*"
+psycopg2 = "*"
 
 [dev-packages]
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 # Create your models here.
 class Company(models.Model):
@@ -10,10 +11,10 @@ class Company(models.Model):
 
 class History(models.Model):
     Company_id = models.ForeignKey(Company, null=True, on_delete=models.CASCADE, related_name='history')
-    Open = models.IntegerField()
-    Close = models.IntegerField()
-    High = models.IntegerField()
-    Low = models.IntegerField()
+    Open = models.IntegerField(null=True)
+    Close = models.IntegerField(null=True)
+    High = models.IntegerField(null=True)
+    Low = models.IntegerField(null=True)
 
     def __str__(self):
         return self.Company_id
@@ -45,3 +46,28 @@ class CompanyInfo(models.Model):
 
     def __str__(self):
         return self.symbol
+    
+class UserAcctManager(BaseUserManager):
+    def create_user(self, first, last, email, user_name=None,  password=None):
+        email_norm = self.normalize_email(email)
+        user = self.model(first=first, last=last, email=email_norm)
+        user.set_password(password)
+        user.save()
+
+        return user
+
+
+class UserAcct(AbstractBaseUser, PermissionsMixin):
+    first = models.CharField()
+    last = models.CharField()
+    email = models.EmailField(unique=True)
+    is_active = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first', 'last']
+
+    objects = UserAcctManager()
+
+    def __str__(self):
+        return self.email

@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.template import loader
 
 
-from .models import Company, History, CompanyInfo
-from .serializers import CompanySerializer, HistorySerializer, CompanyInfoSerializer
+from .models import Company, History, CompanyInfo, UserAcct
+from .serializers import CompanySerializer, HistorySerializer, CompanyInfoSerializer, UserCreateSerializer
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -33,6 +33,10 @@ class HistoryDetail(generics.RetrieveUpdateDestroyAPIView):
 class CompanyInfoList(generics.ListCreateAPIView):
     queryset = CompanyInfo.objects.all()
     serializer_class = CompanyInfoSerializer
+
+class UserList(generics.ListAPIView):
+    queryset = UserAcct.objects.all()
+    serializer_class = UserCreateSerializer
 
 
 class GetCompanyInfo(APIView):

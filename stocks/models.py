@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 # Create your models here.
@@ -10,14 +11,16 @@ class Company(models.Model):
         return self.Symbol
 
 class History(models.Model):
-    Company_id = models.ForeignKey(Company, null=True, on_delete=models.CASCADE, related_name='history')
+    symbol = models.CharField(null=True)
+    validRanges = ArrayField(models.CharField(null=True, blank=True), blank=True,)
     Open = models.IntegerField(null=True)
     Close = models.IntegerField(null=True)
     High = models.IntegerField(null=True)
     Low = models.IntegerField(null=True)
-
+    Volume = models.IntegerField(null=True)
+    
     def __str__(self):
-        return self.Company_id
+        return self.symbol
     
 class CompanyInfo(models.Model):
     symbol = models.CharField()

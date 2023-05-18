@@ -38,6 +38,29 @@ class UserList(generics.ListAPIView):
     queryset = UserAcct.objects.all()
     serializer_class = UserCreateSerializer
 
+class GetHistory(APIView):
+    serializer_class = HistorySerializer
+
+    def get(self, request, pk):
+        ticker = yf.Ticker(pk)
+        meta = ticker.history_metadata
+        history = ticker.history(period='1mo')
+        history_list = history.values.tolist()
+        context = []
+        context.append({
+            'symbol': meta['symbol'],
+            'validRanges': meta['validRanges']
+        })
+        for hist in history_list:
+            context.append({   
+                'Open': hist[0], 
+                'Close': hist[1], 
+                'High': hist[2],
+                'Low': hist[3],
+                'Volume': hist[4],
+            })
+
+        return Response(context)
 
 class GetCompanyInfo(APIView):
     serializer_class = CompanyInfoSerializer

@@ -30,11 +30,13 @@ class HistorySerializer(serializers.HyperlinkedModelSerializer):
         model = History
         fields = (
             'id',
-            'Company_id',
+            'symbol',
+            'validRanges',
             'Open', 
             'Close', 
             'High', 
             'Low', 
+            'Volume',
         )
 
 class CompanyInfoSerializer(serializers.HyperlinkedModelSerializer):

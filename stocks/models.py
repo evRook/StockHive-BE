@@ -13,11 +13,11 @@ class Company(models.Model):
 class History(models.Model):
     symbol = models.CharField(null=True)
     validRanges = ArrayField(models.CharField(null=True, blank=True), blank=True,)
-    Open = models.IntegerField(null=True)
-    Close = models.IntegerField(null=True)
-    High = models.IntegerField(null=True)
-    Low = models.IntegerField(null=True)
-    Volume = models.IntegerField(null=True)
+    Open = ArrayField(models.IntegerField(null=True, blank=True), blank=True,)
+    Close = ArrayField(models.IntegerField(null=True, blank=True), blank=True,)
+    High = ArrayField(models.IntegerField(null=True, blank=True), blank=True,)
+    Low = ArrayField(models.IntegerField(null=True, blank=True), blank=True,)
+    Volume = ArrayField(models.IntegerField(null=True, blank=True), blank=True,)
     
     def __str__(self):
         return self.symbol

@@ -41,24 +41,36 @@ class UserList(generics.ListAPIView):
 class GetHistory(APIView):
     serializer_class = HistorySerializer
 
-    def get(self, request, pk):
+    def get(self, request, pk, pk_alt):
         ticker = yf.Ticker(pk)
         meta = ticker.history_metadata
-        history = ticker.history(period='1mo')
+        history = ticker.history(period=pk_alt)
         history_list = history.values.tolist()
-        context = []
-        context.append({
+        context = [{
             'symbol': meta['symbol'],
-            'validRanges': meta['validRanges']
-        })
+            'validRanges': meta['validRanges'],
+            'Open': [],
+            'Close': [],
+            'High': [],
+            'Low': [],
+            'Volume': []
+        }]
         for hist in history_list:
-            context.append({   
-                'Open': hist[0], 
-                'Close': hist[1], 
-                'High': hist[2],
-                'Low': hist[3],
-                'Volume': hist[4],
-            })
+            context[0]['Open'].append(
+                hist[0], 
+            )
+            context[0]['Close'].append(
+                hist[1], 
+            )
+            context[0]['High'].append(
+                hist[2], 
+            )
+            context[0]['Low'].append(
+                hist[3], 
+            )
+            context[0]['Volume'].append(
+                hist[4], 
+            )
 
         return Response(context)
 

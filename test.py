@@ -12,8 +12,9 @@ hist = goog.history(period='1mo')
 
 list = hist.values.tolist()
 print(type(list))
-print(list[1])
-print(list[0])
+# print(list)
+print(hist)
+
 
 # print(goog.history_metadata.symbol)
 # print(goog.info)
@@ -40,36 +41,36 @@ print(list[0])
 # print(df)
 
 
-ticker = yf.Ticker('AAPL')
-meta = ticker.history_metadata
-history = ticker.history(period='1mo')
-history_list = history.values.tolist()
-context = [{
-    'symbol': meta['symbol'],
-    'validRanges': meta['validRanges'],
-    'Open': [],
-    'Close': [],
-    'High': [],
-    'Low': [],
-    'Volume': []
-}]
-for hist in history_list:
-    context[0]['Open'].append(
-        hist[0], 
-    )
-    context[0]['Close'].append(
-        hist[1], 
-    )
-    context[0]['High'].append(
-        hist[2], 
-    )
-    context[0]['Low'].append(
-        hist[3], 
-    )
-    context[0]['Volume'].append(
-        hist[4], 
-    )
+# ticker = yf.Ticker('AAPL')
+# meta = ticker.history_metadata
+# history = ticker.history(period='1mo')
+# history_list = history.values.tolist()
+# context = [{
+#     'symbol': meta['symbol'],
+#     'validRanges': meta['validRanges'],
+#     'Open': [],
+#     'Close': [],
+#     'High': [],
+#     'Low': [],
+#     'Volume': []
+# }]
+# for hist in history_list:
+#     context[0]['Open'].append(
+#         hist[0], 
+#     )
+#     context[0]['Close'].append(
+#         hist[1], 
+#     )
+#     context[0]['High'].append(
+#         hist[2], 
+#     )
+#     context[0]['Low'].append(
+#         hist[3], 
+#     )
+#     context[0]['Volume'].append(
+#         hist[4], 
+#     )
     
 
-print(context)
+# print(context)
 

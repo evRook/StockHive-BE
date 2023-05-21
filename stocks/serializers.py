@@ -68,6 +68,14 @@ class CompanyInfoSerializer(serializers.HyperlinkedModelSerializer):
             'dayLow',
             'dayHigh',
             'currentPrice',
+            'beta',
+            'volume',
+            'averageVolume',
+            'marketCap',
+            'targetMeanPrice',
+            'dividendRate',
+            'dividendYield',
+            'forwardPE',
             'regularMarketPreviousClose',
             'regularMarketOpen',
             'regularMarketDayLow',
@@ -76,6 +84,7 @@ class CompanyInfoSerializer(serializers.HyperlinkedModelSerializer):
             'fiftyTwoWeekHigh',
             'fiftyTwoWeekLow',
             'currency',
+            'recommendationKey',
         )
 
 class UserCreateSerializer(UserCreateSerializer):

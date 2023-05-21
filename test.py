@@ -6,14 +6,17 @@ import ast
 
 
 
-goog = yf.Ticker('AAPL')
-hist = goog.history(period='1mo')
+goog = yf.Ticker('msft')
+# hist = goog.history(period='1mo')
 # print(type(hist))
 
-list = hist.values.tolist()
-print(type(list))
+# list = hist.values.tolist()
+# print(type(list))
 # print(list)
-print(hist)
+# print(hist)
+
+# earnings = goog.shares
+# print(earnings)
 
 
 # print(goog.history_metadata.symbol)

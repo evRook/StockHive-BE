@@ -100,6 +100,13 @@ class GetCompanyInfo(APIView):
             'open': info['open'],
             'dayLow': info['dayLow'],
             'dayHigh': info['dayHigh'],
+            'currentPrice': info['currentPrice'],
+            'beta': info['beta'],
+            'volume': info['volume'],
+            'averageVolume': info['averageVolume'],
+            'marketCap': info['marketCap'],
+            'targetMeanPrice': info['targetMeanPrice'],
+            'forwardPE': info['forwardPE'],
             'regularMarketPreviousClose': info['regularMarketPreviousClose'],
             'regularMarketOpen': info['regularMarketOpen'],
             'regularMarketDayLow': info['regularMarketDayLow'],
@@ -108,6 +115,7 @@ class GetCompanyInfo(APIView):
             'fiftyTwoWeekHigh': info['fiftyTwoWeekHigh'],
             'fiftyTwoWeekLow': info['fiftyTwoWeekLow'],
             'currency': info['currency'],
+            'recommendationKey': info['recommendationKey'],
         }]
 
         return Response(context)

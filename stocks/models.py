@@ -32,6 +32,7 @@ class CompanyInfo(models.Model):
     country = models.CharField()
     phone = models.CharField()
     website = models.CharField()
+    industry = models.CharField()
     sector = models.CharField()
     longBuisnessSummary = models.TextField()
     auditRisk = models.IntegerField()
@@ -43,6 +44,14 @@ class CompanyInfo(models.Model):
     dayLow = models.IntegerField()
     dayHigh = models.IntegerField()
     currentPrice = models.IntegerField()
+    beta = models.IntegerField()
+    volume = models.IntegerField()
+    averageVolume = models.IntegerField()
+    marketCap = models.IntegerField()
+    targetMeanPrice = models.IntegerField()
+    dividendRate = models.IntegerField(null=True)
+    dividendYield = models.IntegerField(null=True)
+    forwardPE = models.IntegerField()
     regularMarketPreviousClose = models.IntegerField()
     regularMarketOpen = models.IntegerField()
     regularMarketDayLow = models.IntegerField()
@@ -51,6 +60,7 @@ class CompanyInfo(models.Model):
     fiftyTwoWeekHigh = models.IntegerField()
     fiftyTwoWeekLow = models.IntegerField()
     currency = models.CharField()
+    recommendationKey = models.CharField()
 
     def __str__(self):
         return self.symbol

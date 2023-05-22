@@ -3,16 +3,11 @@ from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
-    path('docs/company/', views.CompanyList.as_view(), name='company_list'),
-    path('docs/companyinfo/', views.CompanyInfoList.as_view(), name='company_list'),
-    path('docs/company/<int:pk>', views.CompanyDetail.as_view(), name='company_detail' ),
     path('docs/users', views.UserList.as_view(), name='user_detail' ),
-    path('docs/history/', views.HistoryList.as_view(), name='history_list'),
-    path('docs/history/<int:pk>', views.HistoryDetail.as_view(), name='history_detail'),
     
     # yf api calls
-    path('company/', views.GetCompany.as_view(), name='companys_list'),
     path('company/<str:pk>', views.GetCompanyInfo.as_view(), name='companyinfo_list'),
+    path('ticker', views.TickerList.as_view(), name='ticker_list'),
     path('history/<str:pk>/<str:pk_alt>', views.GetHistory.as_view(), name='companyinfo_list'),
     
     # User

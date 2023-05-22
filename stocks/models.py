@@ -3,12 +3,6 @@ from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 
 # Create your models here.
-class Company(models.Model):
-    Symbol = models.CharField(null=True, max_length=10)
-    Name = models.CharField()
-
-    def __str__(self):
-        return self.Symbol
 
 class History(models.Model):
     symbol = models.CharField(null=True)

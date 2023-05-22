@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.template import loader
 
 
-from .models import Company, History, CompanyInfo, UserAcct
-from .serializers import CompanySerializer, HistorySerializer, CompanyInfoSerializer, UserCreateSerializer
+from .models import History, CompanyInfo, UserAcct
+from .serializers import HistorySerializer, CompanyInfoSerializer, UserCreateSerializer
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -13,26 +13,6 @@ import datetime
 import requests
 
 # Create your views here.
-
-class CompanyList(generics.ListCreateAPIView):
-    queryset = Company.objects.all()
-    serializer_class = CompanySerializer
-
-class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Company.objects.all()
-    serializer_class = CompanySerializer
-
-class HistoryList(generics.ListCreateAPIView):
-    queryset = History.objects.all()
-    serializer_class = HistorySerializer
-
-class HistoryDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = History.objects.all()
-    serializer_class = HistorySerializer
-
-class CompanyInfoList(generics.ListCreateAPIView):
-    queryset = CompanyInfo.objects.all()
-    serializer_class = CompanyInfoSerializer
 
 class UserList(generics.ListAPIView):
     queryset = UserAcct.objects.all()
@@ -73,6 +53,28 @@ class GetHistory(APIView):
             )
 
         return Response(context)
+    
+
+class TickerList(APIView):
+    serializer_class = CompanyInfoSerializer
+
+    def get(self, request):
+        ticker_list = ['aapl', 'msft', 'tsla', 'f', 'meta', 'jnj', 'wmt', 'jpm',  'intc', 'googl', 'aapl', 'pypl', 'amzn', 'amd', 'nvda', 'gme', 'ko']
+        context_list = []
+        for ticker in ticker_list:
+            ticker_obj = yf.Ticker(ticker)
+            ticker_info = ticker_obj.info
+            context = [{
+                'symbol': ticker_info['symbol'],
+                'shortName': ticker_info['shortName'],
+                'currentPrice': ticker_info['currentPrice'],
+                'regularMarketPreviousClose': ticker_info['regularMarketPreviousClose'],
+            }]
+            context_list.append(context)
+        
+        return Response(context_list)
+
+
 
 class GetCompanyInfo(APIView):
     serializer_class = CompanyInfoSerializer
@@ -119,15 +121,6 @@ class GetCompanyInfo(APIView):
             'recommendationKey': info['recommendationKey'],
         }]
 
-        return Response(context)
-
-
-class GetCompany(APIView):
-    serializer_class = CompanySerializer
-
-    def get(self, request):
-        context = [ {"Symbol": data.Symbol, "Name": data.Name} 
-        for data in Company.objects.all()]
         return Response(context)
 
 

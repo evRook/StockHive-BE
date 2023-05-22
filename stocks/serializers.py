@@ -1,31 +1,11 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer
-from .models import Company, History, CompanyInfo
+from .models import History, CompanyInfo
 
 User = get_user_model()
 
-class CompanySerializer(serializers.HyperlinkedModelSerializer):
-    history = serializers.HyperlinkedRelatedField(
-        view_name='history_detail',
-        many=True,
-        read_only=True
-    )
-
-    class Meta:
-        model = Company
-        fields = (
-            'id',
-            'Symbol',
-            'Name',
-            'history',
-        )
-
 class HistorySerializer(serializers.HyperlinkedModelSerializer):
-    Company_id = serializers.PrimaryKeyRelatedField(
-        queryset = Company.objects.all()
-    )
-
     class Meta:
         model = History
         fields = (
@@ -40,10 +20,6 @@ class HistorySerializer(serializers.HyperlinkedModelSerializer):
         )
 
 class CompanyInfoSerializer(serializers.HyperlinkedModelSerializer):
-    Company_id = serializers.PrimaryKeyRelatedField(
-        queryset = Company.objects.all()
-    )
-
     class Meta:
         model = CompanyInfo
         fields = (

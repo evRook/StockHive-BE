@@ -60,6 +60,7 @@ class CompanyInfo(models.Model):
     fiftyTwoWeekHigh = models.IntegerField()
     fiftyTwoWeekLow = models.IntegerField()
     currency = models.CharField()
+    recommendationMean = models.IntegerField()
     recommendationKey = models.CharField()
 
     def __str__(self):

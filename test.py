@@ -6,7 +6,7 @@ import ast
 
 
 
-goog = yf.Ticker('msft')
+# goog = yf.Ticker('msft')
 # hist = goog.history(period='1mo')
 # print(type(hist))
 
@@ -75,5 +75,47 @@ goog = yf.Ticker('msft')
 #     )
     
 
-# print(context)
+# print(goog.revenue_forecasts)
+
+
+
+
+# def get(self, request, pk, pk_alt):
+#     ticker = yf.Ticker(pk)
+#     meta = ticker.history_metadata
+#     history = ticker.history(period=pk_alt)
+#     history_list = history.values.tolist()
+#     context = [{
+#         'symbol': meta['symbol'],
+#         'validRanges': meta['validRanges'],
+#         'Open': [],
+#         'Close': [],
+#         'High': [],
+#         'Low': [],
+#         'Volume': []
+#     }]
+#     for hist in history_list:
+#         context[0]['Open'].append(
+#             hist[0], 
+#         )
+#         context[0]['Close'].append(
+#             hist[1], 
+#         )
+#         context[0]['High'].append(
+#             hist[2], 
+#         )
+#         context[0]['Low'].append(
+#             hist[3], 
+#         )
+#         context[0]['Volume'].append(
+#             hist[4], 
+#         )
+
+#     return context
+
+tickerArr = ['aapl', 'msft', 'tsla', 'f', 'meta', 'jnj', 'wmt', 'jpm',  'intc', 'googl', 'aapl', 'pypl', 'amzn', 'amd', 'nvda', 'gme', 'ko' ]
+for ticker in tickerArr:
+    tick = yf.Ticker(ticker)
+
+    print(tick)
 

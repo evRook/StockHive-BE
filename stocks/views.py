@@ -115,6 +115,7 @@ class GetCompanyInfo(APIView):
             'fiftyTwoWeekHigh': info['fiftyTwoWeekHigh'],
             'fiftyTwoWeekLow': info['fiftyTwoWeekLow'],
             'currency': info['currency'],
+            'recommendationMean': info['recommendationMean'],
             'recommendationKey': info['recommendationKey'],
         }]
 

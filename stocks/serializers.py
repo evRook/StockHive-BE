@@ -84,6 +84,7 @@ class CompanyInfoSerializer(serializers.HyperlinkedModelSerializer):
             'fiftyTwoWeekHigh',
             'fiftyTwoWeekLow',
             'currency',
+            'recommendationMean',
             'recommendationKey',
         )
 

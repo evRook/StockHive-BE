@@ -114,11 +114,17 @@ import ast
 #     return context
 
 tickerArr = ['aapl', 'msft', 'tsla', 'f', 'meta', 'jnj', 'wmt', 'jpm',  'intc', 'googl', 'aapl', 'pypl', 'amzn', 'amd', 'nvda', 'gme', 'ko' ]
+tick = yf.Ticker('aapl', 'msft', 'tsla')
 contextArr = []
 for ticker in tickerArr:
-    tick = yf.Ticker(ticker)
-    tick_info = tick.info
-    contextArr.append(tick_info)
+    ticker_info = tick.info
+    context = [{
+        'symbol': ticker_info['symbol'],
+        'shortName': ticker_info['shortName'],
+        'currentPrice': ticker_info['currentPrice'],
+        'regularMarketPreviousClose': ticker_info['regularMarketPreviousClose'],
+    }]
+    contextArr.append(context)
 
 print(contextArr)
 

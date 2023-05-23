@@ -68,13 +68,21 @@ class UserAcctManager(BaseUserManager):
         user.save()
 
         return user
+    
+    def create_superuser(self, email, first, last, password=None):
+        email_norm = self.normalize_email(email)
+        super_user = self.model(first=first, last=last, email=email_norm, is_staff=True, is_superuser=True)
+        super_user.set_password(password)
+        super_user.save()
 
+        return super_user
 
 class UserAcct(AbstractBaseUser, PermissionsMixin):
     first = models.CharField()
     last = models.CharField()
     email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
@@ -84,3 +92,11 @@ class UserAcct(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+class UserFavorites(models.Model):
+    user = models.ForeignKey(UserAcct, on_delete=models.CASCADE, related_name='user_favorite')
+    symbol = models.CharField()
+    shortName = models.CharField()
+
+    def __str__(self):
+        return f'{self.user} - {self.symbol}'

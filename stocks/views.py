@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.template import loader
 
 
-from .models import History, CompanyInfo, UserAcct
-from .serializers import HistorySerializer, CompanyInfoSerializer, UserCreateSerializer
+from .models import History, CompanyInfo, UserAcct, UserFavorites
+from .serializers import HistorySerializer, CompanyInfoSerializer, UserCreateSerializer, UserFavoritesSerializer
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -59,7 +59,7 @@ class TickerList(APIView):
     serializer_class = CompanyInfoSerializer
 
     def get(self, request):
-        ticker_list = ['aapl', 'msft', 'tsla', 'f', 'meta', 'jnj', 'wmt', 'jpm',  'intc', 'googl', 'aapl', 'pypl', 'amzn', 'amd', 'nvda', 'gme', 'ko']
+        ticker_list = ['aapl', 'dis', 'msft', 'tsla', 'f', 'meta', 'nflx', 'sbux', 'gpro', 'bac', 'jnj', 'wmt', 'jpm',  'intc', 'googl', 'ge', 'snap', 'pypl', 'amzn', 'amd', 'nvda', 'gme', 'ko']
         context_list = []
         for ticker in ticker_list:
             ticker_obj = yf.Ticker(ticker)
@@ -123,4 +123,10 @@ class GetCompanyInfo(APIView):
 
         return Response(context)
 
+class FavoritesList(generics.ListCreateAPIView):
+    queryset = UserFavorites.objects.all()
+    serializer_class = UserFavoritesSerializer
 
+class FavoritesDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UserFavorites.objects.all()
+    serializer_class = UserFavoritesSerializer

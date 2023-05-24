@@ -64,7 +64,30 @@ class CompanyInfoSerializer(serializers.HyperlinkedModelSerializer):
             'recommendationKey',
         )
 
+class UserAcctSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = UserAcct
+        fields = [
+            'id', 
+            'first', 
+            'last', 
+            'email', 
+            'is_active', 
+            'is_staff', 
+            'is_superuser',
+            ]
+
 class UserCreateSerializer(UserCreateSerializer):
+    favorites = serializers.HyperlinkedRelatedField(
+        view_name='user_favorites',
+        many=True,
+        read_only=True
+    )
+
+    favorites_url = serializers.HyperlinkedIdentityField(
+        view_name='favorites_details'
+    )
+
     class Meta:
         model = UserAcct
         fields = (
@@ -73,6 +96,8 @@ class UserCreateSerializer(UserCreateSerializer):
             'last',
             'email',
             'password',
+            'favorites',
+            'favorites_url'
         )
 
 class UserFavoritesSerializer(serializers.HyperlinkedModelSerializer):

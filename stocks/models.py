@@ -94,7 +94,7 @@ class UserAcct(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 class UserFavorites(models.Model):
-    user = models.ForeignKey(UserAcct, on_delete=models.CASCADE, related_name='user_favorite')
+    user = models.ForeignKey(UserAcct, on_delete=models.CASCADE, related_name='favorites_details')
     symbol = models.CharField()
     shortName = models.CharField()
 

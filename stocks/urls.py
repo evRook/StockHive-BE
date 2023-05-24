@@ -3,10 +3,10 @@ from django.views.generic import TemplateView
 from . import views
 
 urlpatterns = [
-    path('users/', views.UserList.as_view(), name='user_details'),
-    path('users/favorites', views.FavoritesList.as_view(), name='user_favorites'),
-    path('users/favorites/<str:pk>', views.FavoritesDetail.as_view(), name='favorites_details'),
-    path('users/favorites/<str:pk>/create', views.FavoritesCreate.as_view(), name='favorites_create'),
+    path('', views.UserList.as_view(), name='user_details'),
+    # path('users/favorites', views.FavoritesList.as_view(), name='user_favorites'),
+    # path('users/favorites/<str:pk>', views.FavoritesDetail.as_view(), name='favorites_details'),
+    # path('users/favorites/<str:pk>/create', views.FavoritesCreate.as_view(), name='favorites_create'),
 
     # yf api calls
     path('company/<str:pk>', views.GetCompanyInfo.as_view(), name='companyinfo_list'),

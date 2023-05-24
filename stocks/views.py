@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.template import loader
 
 
-from .models import History, CompanyInfo, UserAcct, UserFavorites
-from .serializers import HistorySerializer, CompanyInfoSerializer, UserCreateSerializer, UserFavoritesSerializer
+from .models import UserAcct, UserFavorites , CompanyInfo
+from .serializers import HistorySerializer, CompanyInfoSerializer, UserCreateSerializer, UserFavoritesSerializer, UserAcctSerializer
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -122,6 +122,7 @@ class GetCompanyInfo(APIView):
         }]
 
         return Response(context)
+    
 
 class FavoritesList(generics.ListCreateAPIView):
     queryset = UserFavorites.objects.all()
@@ -130,3 +131,16 @@ class FavoritesList(generics.ListCreateAPIView):
 class FavoritesDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = UserFavorites.objects.all()
     serializer_class = UserFavoritesSerializer
+
+class FavoritesCreate(generics.ListCreateAPIView):
+    queryset = UserFavorites.objects.all()
+    serializer_class = UserFavoritesSerializer
+
+    def create(self, request, *args, **kwargs):
+        print(self.kwargs)
+        if request.method == 'POST':
+            symbol = request.POST.get('symbol')
+            short_name = request.POST.get('shortName')
+            favorite = UserFavorites(request.POST, user_id=str(self.kwargs.get('pk')), symbol=symbol, shortName=short_name)
+            return Response(self.get_serializer(favorite).data)
+        return super().create(request, *args, **kwargs)

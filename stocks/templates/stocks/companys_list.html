@@ -1,9 +1,0 @@
-{% block content %}
-    <ul>
-        {% for company in companys %}
-            <li>
-                <a href="{% url 'company_detail' pk=comapny.id %}">{{ company.Symbol }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-{% endblock %}

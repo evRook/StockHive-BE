@@ -78,15 +78,15 @@ class UserAcctSerializer(serializers.HyperlinkedModelSerializer):
             ]
 
 class UserCreateSerializer(UserCreateSerializer):
-    favorites = serializers.HyperlinkedRelatedField(
-        view_name='user_favorites',
-        many=True,
-        read_only=True
-    )
+    # favorites = serializers.HyperlinkedRelatedField(
+    #     view_name='user_favorites',
+    #     many=True,
+    #     read_only=True
+    # )
 
-    favorites_url = serializers.HyperlinkedIdentityField(
-        view_name='favorites_details'
-    )
+    # favorites_url = serializers.HyperlinkedIdentityField(
+    #     view_name='favorites_details'
+    # )
 
     class Meta:
         model = UserAcct
@@ -96,21 +96,21 @@ class UserCreateSerializer(UserCreateSerializer):
             'last',
             'email',
             'password',
-            'favorites',
-            'favorites_url'
+            # 'favorites',
+            # 'favorites_url'
         )
 
-class UserFavoritesSerializer(serializers.HyperlinkedModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(
-        queryset = UserAcct.objects.all()
-    )
+# class UserFavoritesSerializer(serializers.HyperlinkedModelSerializer):
+#     user = serializers.PrimaryKeyRelatedField(
+#         queryset = UserAcct.objects.all()
+#     )
 
-    class Meta:
-        model = UserFavorites
-        fields = (
-            'id',
-            'user',
-            'symbol',
-            'shortName',
-        )
+#     class Meta:
+#         model = UserFavorites
+#         fields = (
+#             'id',
+#             'user',
+#             'symbol',
+#             'shortName',
+#         )
 

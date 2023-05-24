@@ -61,7 +61,7 @@ class CompanyInfo(models.Model):
         return self.symbol
     
 class UserAcctManager(BaseUserManager):
-    def create_user(self, first, last, email, user_name=None,  password=None):
+    def create_user(self, first, last, email, password=None, is_staff=False, is_superuser=False):
         email_norm = self.normalize_email(email)
         user = self.model(first=first, last=last, email=email_norm)
         user.set_password(password)
@@ -93,10 +93,10 @@ class UserAcct(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-class UserFavorites(models.Model):
-    user = models.ForeignKey(UserAcct, on_delete=models.CASCADE, related_name='favorites_details')
-    symbol = models.CharField()
-    shortName = models.CharField()
+# class UserFavorites(models.Model):
+#     user = models.ForeignKey(UserAcct, on_delete=models.CASCADE, related_name='favorites_details')
+#     symbol = models.CharField()
+#     shortName = models.CharField()
 
-    def __str__(self):
-        return f'{self.user} - {self.symbol}'
+#     def __str__(self):
+#         return f'{self.user} - {self.symbol}'
